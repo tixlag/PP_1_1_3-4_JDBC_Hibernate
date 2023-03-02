@@ -22,9 +22,8 @@ public class UserDaoJDBCImpl implements UserDao {
                     "age INT," +
                     "PRIMARY KEY(id))");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
-        System.out.println("Table created successfully");
     }
 
     public void dropUsersTable() {
@@ -32,9 +31,8 @@ public class UserDaoJDBCImpl implements UserDao {
             Statement statement = connection.createStatement();
             statement.execute("DROP TABLE IF EXISTS users");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
-        System.out.println("Table dropped successfully");
     }
 
     public void saveUser(String name, String lastName, byte age) {
@@ -46,7 +44,7 @@ public class UserDaoJDBCImpl implements UserDao {
             ps.execute();
             System.out.printf("User с именем – %s добавлен в базу данных\n", name);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -55,9 +53,8 @@ public class UserDaoJDBCImpl implements UserDao {
             Statement statement = connection.createStatement();
             statement.execute("DELETE FROM users WHERE id = " + id);
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
-        System.out.println("User deleted successfully");
     }
 
     public List<User> getAllUsers() {
@@ -69,10 +66,8 @@ public class UserDaoJDBCImpl implements UserDao {
                 res.add(new User(rs.getString("name"), rs.getString("last_name"), rs.getByte("age")));
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
-
-        System.out.println("got all users");
         return res;
     }
 
@@ -81,8 +76,7 @@ public class UserDaoJDBCImpl implements UserDao {
             Statement statement = connection.createStatement();
             statement.execute("DELETE FROM users");
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
-        System.out.println("All user deleted successfully");
     }
 }
