@@ -8,10 +8,11 @@ public class Util {
     private final static String URL = "jdbc:mysql://localhost:3306/testdb";
     private final static String USERNAME = "root";
     private final static String PASSWORD = "root";
-    public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(URL, USERNAME, PASSWORD);
-    }
+    private static Connection connection;
 
-
-    // реализуйте настройку соеденения с БД
+    public static Connection getConnection() {
+        if (connection == null) {
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        }
+        return connection;
 }
